@@ -1,6 +1,8 @@
 package automationFramework;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 
@@ -11,6 +13,7 @@ public class FirefoxCP {
 		capabilities.setCapability("marionette", true);
 		WebDriver driver = new FirefoxDriver(capabilities);
 		String url = "https://release.go.channelpilot.com";
+		String user = "release_1080@channelpilot.com";
 		
 		driver.get("https://release.go.channelpilot.com");
 		String title = driver.getTitle();
@@ -26,6 +29,11 @@ public class FirefoxCP {
 		
 		String source = driver.getPageSource();
 		System.out.println("The page source's total length is "+source.length());
+
+		driver.findElement(By.name("email")).click();
+		driver.findElement(By.name("email")).sendKeys(user);
+		WebElement parent = driver.findElement(By.className("password"));
+		parent.findElement(By.name("password")).click();
 		Thread.sleep(5000);
 		driver.quit();
 	}
